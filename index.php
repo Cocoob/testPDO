@@ -68,10 +68,13 @@ catch(PDOException $e){
 $nbr_de_flash_an  = "SELECT COUNT(IdCode) FROM Flasher WHERE Dateflash BETWEEN '2021-01-01' AND '2021-12-31' ";
 $nbr_de_flash_trimestre  = "SELECT COUNT(IdCode) FROM Flasher WHERE Dateflash BETWEEN '2021-01-01' AND '2021-03-01' ";
 $nbr_de_flash_mois  = "SELECT COUNT(IdCode) FROM Flasher WHERE Dateflash BETWEEN '2021-02-01' AND '2021-02-28' ";
+$nbr_de_flash_semaine  = "SELECT COUNT(IdCode) FROM Flasher WHERE Dateflash BETWEEN '2021-02-22' AND '2021-02-28' ";
+
 
 $stmt = $nbr_de_flash_an;
 $stmt2 = $nbr_de_flash_trimestre;
 $stmt3 = $nbr_de_flash_mois;
+$stmt4 = $nbr_de_flash_semaine;
 
 // Requete SQL Table
 $table_plus_utilisé_an = "SELECT IdTable
@@ -82,8 +85,42 @@ ORDER BY COUNT(IdTable) DESC
 LIMIT 1
 ";
 
-$stmt4 = $table_plus_utilisé_an;
+$table_plus_utilisé_trimestre = "SELECT IdTable
+FROM Flasher
+WHERE Dateflash BETWEEN '2021-01-01' AND '2021-03-01'
+GROUP BY IdTable
+ORDER BY COUNT(IdTable) DESC
+LIMIT 1
+";
 
+$table_plus_utilisé_mois = "SELECT IdTable
+FROM Flasher
+WHERE Dateflash BETWEEN '2021-02-01' AND '2021-02-28'
+GROUP BY IdTable
+ORDER BY COUNT(IdTable) DESC
+LIMIT 1
+";
+
+$table_plus_utilisé_semaine = "SELECT IdTable
+FROM Flasher
+WHERE Dateflash BETWEEN '2021-02-22' AND '2021-02-28'
+GROUP BY IdTable
+ORDER BY COUNT(IdTable) DESC
+LIMIT 1
+";
+
+$table_plus_utilisé_jour = "SELECT IdTable
+FROM Flasher
+WHERE Dateflash BETWEEN '2021-01-01' AND '2021-12-31'
+GROUP BY IdTable
+ORDER BY COUNT(IdTable) DESC
+LIMIT 1
+";
+
+$stmt5 = $table_plus_utilisé_an;
+$stmt6 = $table_plus_utilisé_trimestre;
+$stmt7 = $table_plus_utilisé_mois;
+$stmt8 = $table_plus_utilisé_semaine;
 ?>
 
 <!DOCTYPE html>
@@ -126,21 +163,72 @@ $stmt4 = $table_plus_utilisé_an;
                             $dbco = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
                             $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                            $stmt4 = $dbco->query($table_plus_utilisé_an);
+                            $stmt5 = $dbco->query($table_plus_utilisé_an);
                         }
                               
                         catch(PDOException $e){
                             echo "Erreur : " . $e->getMessage();
                         }
 
-                        while($row = $stmt4->fetch(PDO::FETCH_ASSOC)):
+                        while($row = $stmt5->fetch(PDO::FETCH_ASSOC)):
                         echo $row['IdTable'];
                     endwhile;
                         ?>
             </td>
-            <td>Content 1</td>
-            <td>Content 1</td>
-            <td>Content 1</td>
+            <td>
+            <?php
+                        try{
+                            $dbco = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
+                            $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            $stmt6 = $dbco->query($table_plus_utilisé_an);
+                        }
+                              
+                        catch(PDOException $e){
+                            echo "Erreur : " . $e->getMessage();
+                        }
+
+                        while($row = $stmt6->fetch(PDO::FETCH_ASSOC)):
+                        echo $row['IdTable'];
+                    endwhile;
+                        ?>
+            </td>
+            <td>
+            <?php
+                        try{
+                            $dbco = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
+                            $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            $stmt7 = $dbco->query($table_plus_utilisé_an);
+                        }
+                              
+                        catch(PDOException $e){
+                            echo "Erreur : " . $e->getMessage();
+                        }
+
+                        while($row = $stmt7->fetch(PDO::FETCH_ASSOC)):
+                        echo $row['IdTable'];
+                    endwhile;
+                        ?>
+            </td>
+            <td>
+            <?php
+                        try{
+                            $dbco = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
+                            $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            $stmt5 = $dbco->query($table_plus_utilisé_an);
+                        }
+                              
+                        catch(PDOException $e){
+                            echo "Erreur : " . $e->getMessage();
+                        }
+
+                        while($row = $stmt5->fetch(PDO::FETCH_ASSOC)):
+                        echo $row['IdTable'];
+                    endwhile;
+                        ?>
+            </td>
             <td>Content 1</td>
         </tr>
         </table>
@@ -239,7 +327,24 @@ $stmt4 = $table_plus_utilisé_an;
                         echo $row['COUNT(IdCode)'];
                     endwhile;
                         ?></td>
-            <td>Content 1</td>
+            <td>
+            <?php
+                        try{
+                            $dbco = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD);
+                            $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                            $stmt4 = $dbco->query($table_plus_utilisé_an);
+                        }
+                              
+                        catch(PDOException $e){
+                            echo "Erreur : " . $e->getMessage();
+                        }
+
+                        while($row = $stmt4->fetch(PDO::FETCH_ASSOC)):
+                        echo $row['IdTable'];
+                    endwhile;
+                        ?>
+            </td>
             <td>Content 1</td>
         </tr>
         </table>
